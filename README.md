@@ -3,7 +3,7 @@
 A simple and clean **Weather Forecast application** built with **HTML, CSS, and JavaScript**.  
 It allows users to check real-time weather for any city using the **OpenWeatherMap API** and displays how long the API took to respond.
 
-This version uses a **separate JavaScript file (`script.js`)** instead of inline JS for cleaner structure and maintainability.
+This version uses a **separate JavaScript file (`main.js`)** instead of inline JS for cleaner structure and maintainability.
 
 ---
 
@@ -35,5 +35,5 @@ This version uses a **separate JavaScript file (`script.js`)** instead of inline
 ```bash
 .
 ├── index.html      # Main webpage (HTML + CSS)
-├── script.js       # All JavaScript logic (API calls, events, DOM updates)
+├── main.js       # All JavaScript logic (API calls, events, DOM updates)
 └── README.md       # Documentation
