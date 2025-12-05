@@ -25,7 +25,7 @@ const apiKey = "44325035c22759f95f063dfb8185d1b6"
             const start = performance.now();
             const response = await fetch(apiurl + `&q=${encodeURIComponent(cityname)}&appid=${apiKey}`);
             if(!response.ok){
-                weatherResult.innerHTML = "City not found. Please check the city name and try again.";
+                weatherresult.innerHTML = "City not found. Please check the city name and try again.";
                 return;
             }
             const end = performance.now(); 

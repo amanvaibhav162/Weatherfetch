@@ -1,80 +1,166 @@
-<!--WEATHER FETCH-->
+<!-- WEATHER FETCH -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>--WEATHER--</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+
+    <!-- Optional: nicer font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Poppins", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            padding: 16px;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            max-width: 420px;
+            padding: 24px 20px 26px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+            color: #f9fafb;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f9fafb;
+            margin: 0 0 4px;
+            font-size: 26px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin: 0 0 18px;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        #cityinput {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 999px;
+            border: none;
+            font-size: 14px;
+            outline: none;
+        }
+
+        #cityinput::placeholder {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        #fetchweatherbtn {
+            padding: 10px 16px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 999px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.15s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        #fetchweatherbtn:hover {
+            background: #2563eb;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.4);
+            transform: translateY(-1px);
+        }
+
+        #fetchweatherbtn:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+        #weatherresult,
+        #responsetime {
+            margin-top: 12px;
+            padding: 12px 12px 10px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            width: 100%;
+            color: #e5e7eb;
+            font-size: 14px;
+        }
+
+        #weatherresult {
+            min-height: 70px;
+        }
+
+        #responsetime {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        #responsetime span.emoji {
+            font-size: 16px;
+        }
+
+        .status-text {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            #container {
+                padding: 20px 16px 22px;
+            }
+        }
+    </style>
 </head>
-<style>
-    body{
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background: linear-gradient(to right, #fc983a, #eef924);
-    }
-    #container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        max-width: 400px;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        background-color: #ffffff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1{
-        text-align: center;
-        color: #333;
-    }
- 
-    #cityinput {        
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 16px;
-    }
-    #fetchweatherbtn {
-        margin-top: 15px;
-        width:100%;
-        padding: 10px;
-        background: #3b82f6;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    #fetchweatherbtn:hover {
-        background: #1e60d0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-       #weatherresult, #responsetime {
-        margin-top: 20px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        background-color: #e6f7ff;
-        height:auto;
-        width:100%;
-
-    }
-</style>
 <body>
-    <div id = "container">
-        <div>
-            <h1>Weather Forecast</h1>
-            <input type="text" id="cityinput" placeholder="Enter city name">
-            <button id="fetchweatherbtn">Fetch Weather</button>
-            <div id="weatherresult"></div>
-            <div id="responsetime"></div>
+    <div id="container">
+        <h1>Weather Forecast</h1>
+        <p class="subtitle">Type a city and get real-time weather ⛅</p>
+
+        <div class="input-row">
+            <input type="text" id="cityinput" placeholder="e.g. Pune, Mumbai, Bengaluru" />
+            <button id="fetchweatherbtn">Search</button>
+        </div>
+
+        <div id="weatherresult">
+            <div class="status-text">Enter a city name and press Search or hit Enter.</div>
+        </div>
+
+        <div id="responsetime">
+            <span class="emoji">⏱</span>
+            <span class="status-text">Response time will appear here after a request.</span>
         </div>
     </div>
+
     <script src="main.js"></script>
 </body>
-</html>  
+</html>
